@@ -134,7 +134,7 @@ all_trips_v2 %>%
   ggplot(aes(x = member_casual, y = number_of_rides, fill = rideable_type)) +
   geom_col(position = "dodge") +
   labs(x = "Customer Type", y = "Total Number of Rentals", title = "Bike Type", fill = "Bike Type") +
-  scale_y_continuous(breaks=c(0,500000,1000000,1500000,2000000), labels=c("0","500,000","1,000,000","1,500,000","2000,000"))
+  scale_y_continuous(breaks=c(0,500000,1000000,1500000,2000000), labels=c("0","500,000","1,000,000","1,500,000","2,000,000"))
 
 
 #bar graph: total rides per month 
