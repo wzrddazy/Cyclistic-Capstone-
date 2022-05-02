@@ -2,7 +2,6 @@
 install.packages("tidyverse")
 install.packages("lubridate")
 install.packages("ggplot2")
-install.packages("flexdashboard")
 library(tidyverse)
 library(lubridate)
 library(ggplot2)
@@ -44,6 +43,7 @@ all_trips <- bind_rows(Apr_2021, May_2021, Jun_2021, Jul_2021, Aug_2021, Sep_202
 all_trips <- (all_trips %>%
                 select(-c(start_lat, start_lng, end_lat, end_lng)))
 
+#inspect data
 nrow(all_trips)
 dim(all_trips)
 head(all_trips)
@@ -148,24 +148,6 @@ all_trips_v2 %>%
   labs(x = "Month", y = "Total Number of Rides", title = "Rides per Month", fill = "Customer Type") +
   scale_x_discrete(limits = month.abb) +
   scale_y_continuous(breaks=c(0,100000,200000,300000,400000), labels = c("0","100,000","200,000","300,000","400,000"))
-
-#doesn't work
-all_trips_v2 %>% 
-  group_by(member_casual, time) %>% 
-  summarise(number_of_rides = n()) %>% 
-  arrange(member_casual, time) %>%
-  ggplot(aes(x = time, y = number_of_rides, fill = member_casual)) +
-  geom_col(position = "dodge") +
-  labs(x = "Time of Day", y = "Total Number of Rides", title = "Rides per Time of Day", fill = "Customer Type")
-
-all_trips_v2 %>%
-  group_by(member_casual, start_station_name) %>% 
-  summarize(number_of_rides = n()) %>%
-  arrange(desc(number_of_rides))
-    
-
-
-
 
 counts <- aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual + all_trips_v2$day_of_week, FUN = mean)
 write.csv(counts, file = 'Capstone.csv')
